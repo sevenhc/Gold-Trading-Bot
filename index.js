@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-
 const hsts = require("hsts");
+const logger = require("./utils/logger");
 const app = express();
 
 app.use(express.json());
@@ -9,10 +9,9 @@ app.use(cookieParser());
 
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
-    console.error("SyntaxError: ", err);
+    logger.error({ err }, "SyntaxError in request");
     return res.status(400).send({ status: 400, message: "Invalid Request" });
   }
-
   next();
 });
 
@@ -39,6 +38,7 @@ const superRoute = require("./routes/super.routes");
 app.use("/api/super", superRoute);
 
 app.get("/api/health", (req, res) => {
+  logger.info("Health check endpoint called");
   res.status(200).send("<h1>OK</h1>");
 });
 
@@ -47,11 +47,11 @@ const cors = require("cors");
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (WHITE_LIST_URL.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true, credentials: true }; // reflect (enable) the requested origin in the CORS response
+    corsOptions = { origin: true, credentials: true };
   } else {
-    corsOptions = { origin: false }; // disable CORS for this request
+    corsOptions = { origin: false };
   }
-  callback(null, corsOptions); // callback expects two parameters: error and options
+  callback(null, corsOptions);
 };
 
 app.use(cors(corsOptionsDelegate));
@@ -96,6 +96,7 @@ const analyticsRoute = require("./routes/analytics.routes");
 app.use("/api/analytics", analyticsRoute);
 
 app.get("*", function (req, res) {
+  logger.warn({ path: req.path }, "404 Not Found");
   res.status(404).send(`<h1>Whitelabel Error Page</h1>
     <p>This application has no explicit mapping for /error, so you are seeing this as a fallback.</p>
     <p>${new Date()}</p>
@@ -106,31 +107,34 @@ app.get("*", function (req, res) {
 
 const { connect } = require("./config/database");
 const { connectRead } = require("./config/readdatabase");
-
 const { GetDBInfo, GetOfferWallInfo } = require("./Global");
 const { redisClusterConnection } = require("./utils/cache");
 
 app.listen(process.env.APP_PORT || 5000, async () => {
-  const dbInfo = await GetDBInfo();
+  try {
+    const dbInfo = await GetDBInfo();
 
-  connect({
-    host: dbInfo.DB_Host,
-    user: dbInfo.DB_User,
-    password: dbInfo.DB_Password,
-    database: dbInfo.DB_Database,
-    port: dbInfo.DB_Port,
-  });
-  connectRead({
-    host: dbInfo.DB_HostRead,
-    user: dbInfo.DB_User,
-    password: dbInfo.DB_Password,
-    database: dbInfo.DB_Database,
-    port: dbInfo.DB_Port,
-  });
+    connect({
+      host: dbInfo.DB_Host,
+      user: dbInfo.DB_User,
+      password: dbInfo.DB_Password,
+      database: dbInfo.DB_Database,
+      port: dbInfo.DB_Port,
+    });
+    connectRead({
+      host: dbInfo.DB_HostRead,
+      user: dbInfo.DB_User,
+      password: dbInfo.DB_Password,
+      database: dbInfo.DB_Database,
+      port: dbInfo.DB_Port,
+    });
 
-  await GetOfferWallInfo();
+    await GetOfferWallInfo();
+    await redisClusterConnection();
 
-  await redisClusterConnection();
-
-  console.log("OW API Runing...");
+    logger.info(`Server started on port ${process.env.APP_PORT || 5000}`);
+  } catch (error) {
+    logger.error({ err: error }, "Failed to start server");
+    process.exit(1);
+  }
 });

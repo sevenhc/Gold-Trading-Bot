@@ -1,5 +1,5 @@
-
 const mysql = require('mysql2/promise')
+const logger = require('../utils/logger');
 
 DBConnection = null;
 module.exports = {
@@ -14,15 +14,21 @@ module.exports = {
         if (this.pool) {
             throw new Error('Pool is already instantiated')
         }
-        const dbpool = mysql.createPool({
-            host,
-            user,
-            password,
-            database,
-            port,
-        })
-        this.pool = dbpool
-        DBConnection = dbpool;
+        try {
+            const dbpool = mysql.createPool({
+                host,
+                user,
+                password,
+                database,
+                port,
+            })
+            this.pool = dbpool
+            DBConnection = dbpool;
+            logger.info('Successfully connected to main database');
+        } catch (error) {
+            logger.error({ err: error }, 'Failed to connect to main database');
+            throw error;
+        }
     },
     disconnect() {
         if (!this.pool) {
@@ -31,8 +37,10 @@ module.exports = {
         return new Promise((resolve, reject) => {
             this.pool.end(err => {
                 if (err) {
+                    logger.error({ err }, 'Error disconnecting from main database');
                     reject(err)
                 } else {
+                    logger.info('Successfully disconnected from main database');
                     resolve()
                 }
             })
@@ -40,22 +48,3 @@ module.exports = {
         })
     },
 }
-
-
-
-// const mysql = require("mysql2");
-// const DB = require("../Global");
-
-
-//  let data = {
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASSWORD,
-//     database: process.env.DB_DATABASE,
-//     port: process.env.DB_PORT,
-//     pool:100
-
-// }
-// let connectionPool  = mysql.createPool(data);
-
-// module.exports = connectionPool.promise();
