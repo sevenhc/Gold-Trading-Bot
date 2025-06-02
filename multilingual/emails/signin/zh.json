@@ -1,0 +1,12 @@
+{
+    "Subject": "OfferWall Signin - Verification Mail",
+    "Body": {
+        "Title": "Please use following single verification link",
+        "Paragraph1": "The link will be expired in 5 minutes",
+        "Button": "Click Here",
+        "CopyLinkText":"If above link doesn't work, please copy below link and paste in browser",
+        "Paragraph2": "If you didn't request this, you can safely ignore this email. Someone else might have typed your email address by mistake.",
+        "Footer": "Thanks",
+        "FooterFrom":"Offers Exchange Team"
+    }
+}

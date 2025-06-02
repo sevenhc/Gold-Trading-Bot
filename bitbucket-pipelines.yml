@@ -1,0 +1,53 @@
+image: docker:latest
+
+pipelines:
+  branches:
+    production:
+      - step:
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+            - export DOCKER_BUILDKIT=0
+            - docker build -t $DOCKER_HUB_REPOSITORY:prod-$BITBUCKET_COMMIT .
+            - docker push $DOCKER_HUB_REPOSITORY:prod-$BITBUCKET_COMMIT
+    staging:
+      - step:
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+            - export DOCKER_BUILDKIT=0
+            - docker build -t $DOCKER_HUB_REPOSITORY:stg-$BITBUCKET_COMMIT .
+            - docker push $DOCKER_HUB_REPOSITORY:stg-$BITBUCKET_COMMIT
+    development:
+      - step:
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+            - export DOCKER_BUILDKIT=0
+            - docker build -t $DOCKER_HUB_REPOSITORY:dev-$BITBUCKET_COMMIT .
+            - docker push $DOCKER_HUB_REPOSITORY:dev-$BITBUCKET_COMMIT
+    lms_development:
+      - step:
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+            - export DOCKER_BUILDKIT=0
+            - docker build -t $DOCKER_HUB_REPOSITORY:dev-$BITBUCKET_COMMIT .
+            - docker push $DOCKER_HUB_REPOSITORY:dev-$BITBUCKET_COMMIT
+
+definitions:
+  services:
+    docker:
+      memory: 1024

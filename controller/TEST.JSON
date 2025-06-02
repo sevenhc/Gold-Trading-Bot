@@ -1,0 +1,93 @@
+{
+    "offers": [
+        {
+            "id": 11395,
+            "offerType": "CASHBACK",
+            "offerQualification": [
+                "TRANSACTION"
+            ],
+            "currency": "SGD",
+            "eligibleSegments": [],
+            "targetLevel": "MERCHANTS",
+            "targetMerchants": [
+                {
+                    "id": 1115,
+                    "name": "Steelseries LK",
+                    "image": "https://lmsdev-catalyst-client-statics.s3.ap-southeast-1.amazonaws.com/voXIhSopKh/3894849d-19c4-4948-988e-fad2e19a2bee.png",
+                    "website": null,
+                    "category": {
+                        "name": "Miscellaneous"
+                    },
+                    "returnPeriod": null
+                }
+            ],
+            "targetCategories": [],
+            "minimumSpend": null,
+            "rewardEveryTransaction": true,
+            "rewardFrequency": null,
+            "repeatFrequency": null,
+            "minimumTransactions": null,
+            "customerRedemptionLimit": null,
+            "spendTargetType": null,
+            "targetSpendValue": null,
+            "spendTransactionTargetType": null,
+            "targetTransactionCount": null,
+            "spendRewardLimit": null,
+            "spendTxCountRewardLimit": null,
+            "spendRepeatFrequency": null,
+            "redemptionMechanism": null,
+            "codeApplicability": null,
+            "showSaveRewardLimit": null,
+            "rewardType": "PERCENTAGE",
+            "rewardValue": 0.1,
+            "maximumRewardValue": null,
+            "rewardPointsPerAmount": null,
+            "rewardCriteria": "TRANSACTION",
+            "rewardScheme": "CASHBACK",
+            "specificTxFrequency": null,
+            "specificRewards": [],
+            "validFrom": "2025-05-11T19:56:22.000Z",
+            "validFromUTC": "2025-05-11T14:26:22.000Z",
+            "validTo": null,
+            "validToUTC": null,
+            "published": "2025-05-11T14:26:22.000Z",
+            "eligibleDays": [
+                "EVERYDAY"
+            ],
+            "salesChannel": "ALL",
+            "timezone": "Asia/Colombo",
+            "activationRequired": false,
+            "activationStatus": null,
+            "activationExpiry": null,
+            "countries": [
+                "ALL"
+            ],
+            "countryNames": [
+                "ALL"
+            ],
+            "cardProductTypes": [
+                "ALL"
+            ],
+            "tags": [],
+            "remarks": null,
+            "trackingUrl": null,
+            "couponCode": null,
+            "promoURL": null,
+            "defaultLanguageCode": "en",
+            "defaultLanguageLabel": "English",
+            "defaultLanguageNative": "English",
+            "language": "si",
+            "title": "පිරිනැමීමේ විස්තරය සිංහල",
+            "description": "<p>පිරිනැමීමේ විස්තරය සිංහල</p>",
+            "termsAndConditions": "<p>පිරිනැමීමේ විස්තරය සිංහල</p>",
+            "merchantDisplayName": "Test",
+            "tncURL": "https://offerwall-web-lms.pulseid.com/visa-japan/signin",
+            "tncText": "offer link english",
+            "images": [],
+            "offerLogo": "",
+            "fundingModel": "PRE",
+            "budget": null,
+            "balanceBudget": null,
+            "redemptionLimit": null,
+            "redemptionsRemaining": null,
+            "totalRedemptions": null,"customehasitha@hasitha-X

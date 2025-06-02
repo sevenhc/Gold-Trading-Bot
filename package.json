@@ -1,36 +1,42 @@
 {
-  "name": "spa-management-system",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "suncorp-offerwall-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "server": "node server/index.js"
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://rfernandopulse@bitbucket.org/pulseid/suncorp-offerwall-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/pulseid/suncorp-offerwall-api/src/master/",
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "bcryptjs": "^2.4.3",
+    "@aws-sdk/client-personalize-runtime": "^3.485.0",
+    "amazon-cognito-identity-js": "^6.3.7",
+    "aws-sdk": "^2.1529.0",
+    "axios": "^1.6.4",
+    "buffer": "^6.0.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "@mui/material": "^5.15.1",
-    "@mui/icons-material": "^5.15.1",
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
+    "crypto-js": "^4.2.0",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "hsts": "^2.2.0",
+    "is-valid-domain": "^0.1.6",
+    "jsonwebtoken": "^9.0.2",
+    "moment-timezone": "^0.5.44",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.0",
+    "node-cache": "^5.1.2",
+    "nodemailer": "^6.9.14",
+    "redis": "^4.7.0",
+    "request": "^2.88.2",
+    "ssl-root-cas": "^1.3.1"
   }
 }
